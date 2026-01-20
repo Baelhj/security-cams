@@ -2102,11 +2102,13 @@ import Layout from "../layouts/Layout.astro";
 </style>
 
 <script>
-  const faqItems = Array.from(document.querySelectorAll(".cs-faq-item"));
-  for (const item of faqItems) {
-    const onClick = () => {
-      item.classList.toggle("active");
-    };
-    item.addEventListener("click", onClick);
-  }
+  document.addEventListener("DOMContentLoaded", () => {
+    const faqItems = Array.from(document.querySelectorAll(".cs-faq-item"));
+    for (const item of faqItems) {
+      const onClick = () => {
+        item.classList.toggle("active");
+      };
+      item.addEventListener("click", onClick);
+    }
+  });
 </script>

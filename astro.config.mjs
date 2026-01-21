@@ -6,13 +6,21 @@ import tailwindcss from "@tailwindcss/vite";
 
 export default defineConfig({
   output: "server",
-  adapter: cloudflare(),
+  adapter: cloudflare({
+    imageService: "compile",
+    platformProxy: {
+      enabled: false,
+    },
+  }),
+  image: {
+    service: {
+      entrypoint: "astro/assets/services/compile",
+    },
+  },
   vite: {
     plugins: [tailwindcss()],
   },
   build: {
-    // 'auto' = inline small CSS files, link big ones
-    // 'always' = inline everything (good for small Tailwind projects)
     inlineStylesheets: "auto",
   },
 });

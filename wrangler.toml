@@ -2,15 +2,16 @@ name = "homesafe"
 compatibility_date = "2024-12-16"
 pages_build_output_dir = "dist"
 
-# KV Namespace for sessions - required for Cloudflare adapter
-[[kv_namespaces]]
+[env.production]
+# KV Namespace for sessions in production
+[[env.production.kv_namespaces]]
 binding = "SESSION"
 id = "temporary-session-store"
 preview_id = "temporary-session-store"
 
-# Environment variables
-[env.production]
-vars = { ENVIRONMENT = "production" }
-
-[env.development]
-vars = { ENVIRONMENT = "development" }
+[env.preview]
+# KV Namespace for sessions in preview
+[[env.preview.kv_namespaces]]
+binding = "SESSION"
+id = "temporary-session-store"
+preview_id = "temporary-session-store"

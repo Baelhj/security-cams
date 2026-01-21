@@ -1,5 +1,6 @@
 name = "homesafe"
 compatibility_date = "2024-12-16"
+pages_build_output_dir = "dist"
 
 # KV Namespace for sessions - required for Cloudflare adapter
 [[kv_namespaces]]

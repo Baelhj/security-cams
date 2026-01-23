@@ -1,22 +1,13 @@
 import type { APIRoute } from "astro";
 
-export const POST: APIRoute = async ({
-  request,
-  locals,
-}) => {
-  // Get API key from locals.runtime.env (Cloudflare production) or import.meta.env (dev/build)
-  const RESEND_API_KEY = (locals as any).runtime?.env?.RESEND_API_KEY || (import.meta as any).env.RESEND_API_KEY;
-  
-  if (!RESEND_API_KEY) {
-    return new Response(
-      JSON.stringify({ error: "RESEND_API_KEY is not configured" }),
-      {
-        status: 500,
-        headers: { "Content-Type": "application/json" },
-      },
-    );
-  }
+export const POST: APIRoute = async ({ request }) => {
+  const RESEND_API_KEY = import.meta.env.RESEND_API_KEY;
 
+  if (!RESEND_API_KEY) {
+    return new Response(JSON.stringify({ error: "Missing RESEND_API_KEY" }), {
+      status: 500,
+    });
+  }
 
   try {
     const formData = await request.formData();
